@@ -16,3 +16,9 @@ class RoomsView(generic.ListView):
 
     def get_queryset(self):
         return Room.objects.all()
+
+
+class RoomDetail(generic.DetailView):
+    model = Room
+    template_name = 'hotel/room.html'
+    pass

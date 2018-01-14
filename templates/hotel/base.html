@@ -27,6 +27,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/DateTimePicker.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
 
+    {% block head %}
+    {% endblock %}
     <!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
       <script src="js/respond.min.js"></script>
@@ -178,9 +180,7 @@
 <div id="toTop"></div><!-- Back to top button -->
 
 <!-- COMMON SCRIPTS -->
-<script src="{% static "js/jquery-1.11.2.min.js"  %}"></script>
-<script src="{% static 'js/common_scripts_min.js' %}"></script>
-<script src="{% static 'js/functions.js' %}"></script>
+
 
 <script type="text/javascript" src="{% static 'js/DateTimePicker.js' %}"></script>
 <script type="text/javascript">$("#dtBox").DateTimePicker();</script>

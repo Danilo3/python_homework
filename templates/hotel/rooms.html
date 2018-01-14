@@ -21,7 +21,7 @@
 
                     <div class="row">
 
-                	<div class="room_desc clearfix" onclick="location.href='room_detail.html';">
+                	<div class="room_desc clearfix" onclick="location.href='/room/{{ room.id }}';">
                 	<div class="col-md-7">
                     	<figure><img src="{% static room.image_path %}" alt="" class="img-responsive"></figure>
                     </div>
@@ -195,5 +195,17 @@
             
         </div><!-- End row -->
     </div><!-- End container -->
-    
+
+        <div id="toTop"></div><!-- Back to top button -->
+
+    <script src="{% static "js/jquery-1.11.2.min.js"  %}"></script>
+    <script src="{% static 'js/common_scripts_min.js' %}"></script>
+    <script src="{% static 'js/functions.js' %}"></script>
+    <script src="{% static 'js/theia-sticky-sidebar.js' %}"></script>
+<script>
+    jQuery('.sidebar').theiaStickySidebar({
+      additionalMarginTop: 80
+    });
+</script>
+
 {% endblock %}
