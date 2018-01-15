@@ -117,7 +117,8 @@
                 </div>
                 </div>
             </div><!-- End col -->
-            
+
+        {% if request.user.is_authenticated  %}
               <div class="col-md-4" id="sidebar">
             <div class="theiaStickySidebar">
             	<div class="box_style_1">
@@ -190,7 +191,7 @@
                 </div><!-- End box_style -->
             </div><!-- End theiaStickySidebar -->
             </div><!-- End col -->
-            
+        {% endif %}
         </div><!-- End row -->
 
     </div><!-- End container -->

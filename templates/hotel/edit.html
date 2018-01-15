@@ -1,25 +1,30 @@
 {% extends "hotel/base.html" %}
 
 {% load static %}
-{% block title %}Dashboard{% endblock %}
 
 {% block content %}
 
-     <!-- SubHeader =============================================== -->
+      <!-- SubHeader =============================================== -->
     <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="{% static 'img/sub_header_short1.jpg' %}" data-natural-width="1400" data-natural-height="350">
         <div id="subheader">
-            <h1>Dashboard</h1>
+            <h1>Edit your account</h1>
     </div><!-- End subheader -->
     </section><!-- End section -->
     <!-- End SubHeader ============================================ -->
-     <div class ="container margin_60">
+
+    <div class ="container margin_60">
     <div class="col-lg-9 col-md-8">
-
-    <p>Welcome to your dashboard. You can <a href="{% url "edit" %}">edit your profile</a></p>
-
+        <form action="." method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ user_form.as_p }}
+      {{ profile_form.as_p }}
+      <button type="submit">Save changes</button>
+    </form>
     </div>
-     </div>
-    <script src="{% static "js/jquery-1.11.2.min.js"  %}"></script>
+    </div>
+
+
+      <script src="{% static "js/jquery-1.11.2.min.js"  %}"></script>
     <script src="{% static 'js/common_scripts_min.js' %}"></script>
     <script src="{% static 'js/functions.js' %}"></script>
 

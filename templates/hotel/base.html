@@ -73,8 +73,11 @@
                         <li {% if section == "dashboard" %}class="selected"{% endif %}>
                         <a href="{% url "dashboard" %}">My dashboard</a>
                         </li>
+                         <li><a href="{% url "logout" %}">Logout</a></li>
                         <li><a href="#">Hello, {{request.user.first_name}} !</a></li>
-                        <li><a href="{% url "logout" %}">Logout</a></li>
+                          {% if request.user.profile.photo %}
+                            <li><img src="{{ request.user.profile.photo.url }}"></li>
+                          {% endif %}
                      {% else %}
                         <li><a href="{% url "login" %}">Log In</a></li>
                      {% endif %}

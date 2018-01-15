@@ -4,8 +4,7 @@ from django.shortcuts import render
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 
-from .forms import LoginForm, UserRegistrationForm
-
+from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 
 # Опять же, спасибо django за готовую форму аутентификации.
 from django.contrib.auth.forms import AuthenticationForm
@@ -18,7 +17,7 @@ from django.contrib.auth import login, authenticate
 from django.views import generic
 
 
-from hotel.models import Room
+from hotel.models import Room, Profile
 
 from django.contrib.auth.decorators import login_required
 
@@ -103,7 +102,8 @@ def user_login(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'hotel/dashboard.html', {'section': 'dashboard'})
+    photo = request.user.profile.photo
+    return render(request, 'hotel/dashboard.html', {'section': 'dashboard', "photo": photo})
 
 
 def register(request):
@@ -116,7 +116,26 @@ def register(request):
             new_user.set_password(user_form.cleaned_data['password'])
             # Save the User object
             new_user.save()
+            # Create the user profile
+            profile = Profile.objects.create(user=new_user)
             return render(request, 'hotel/register_done.html', {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
     return render(request, 'hotel/register.html', {'user_form': user_form})
+
+
+@login_required
+def edit(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        profile_form = ProfileEditForm(instance=request.user.profile, data=request.POST, files=request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+    return render(request,
+                      'hotel/edit.html',
+                      {'user_form': user_form,
+                       'profile_form': profile_form})
