@@ -21,4 +21,6 @@ class RoomsView(generic.ListView):
 class RoomDetail(generic.DetailView):
     model = Room
     template_name = 'hotel/room.html'
-    pass
+
+def contactsView(request):
+    return render(request, 'hotel/contacts.html')
