@@ -19,7 +19,8 @@
                 <p>Your username and password didn't match.
                 Please try again.</p>
             {% else %}
-                <p>Please, use the following form to log-in:</p>
+                <p>Please, use the following form to log-in. If you don't have an account <a href="{% url "register" %}">register here</a></p>
+
             {% endif %}
 
         	<div class="col-lg-9 col-md-8">
@@ -30,13 +31,8 @@
                     <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
                     {{ form.as_p }}
                     <input type="hidden" name="next" value="{% url 'rooms' %}"/>
-                    <div class="row">
                         <div class="col-md-3">
                              <button type="submit" class="btn_1 white">Log In</button>
-                        </div>
-                        <div class="col-md-3">
-                             <a href="{% url 'register' %}" > New to this site?</a>
-                        </div>
                     </div>
 
                 </form>
