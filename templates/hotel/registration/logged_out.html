@@ -1,0 +1,21 @@
+{% extends "hotel/base.html" %}
+{% load static %}
+{% block title %}Logged out{% endblock %}
+{% block content %}
+
+     <!-- SubHeader =============================================== -->
+    <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="{% static 'img/sub_header_short1.jpg' %}" data-natural-width="1400" data-natural-height="350">
+        <div id="subheader">
+            <h1>Logged out</h1>
+    </div><!-- End subheader -->
+    </section><!-- End section -->
+    <!-- End SubHeader ============================================ -->
+
+    <div class="container margin_60">
+        <p>You have been successfully logged out. You can <a href="{% url "login" %}">log-in again</a>.</p>
+    </div>
+
+    <script src="{% static "js/jquery-1.11.2.min.js"  %}"></script>
+    <script src="{% static 'js/common_scripts_min.js' %}"></script>
+    <script src="{% static 'js/functions.js' %}"></script>
+{% endblock %}

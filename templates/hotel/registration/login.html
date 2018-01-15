@@ -15,16 +15,21 @@
     <div class="container margin_60">
     <h2 class="main_title"><em></em>Welcome to Dacha Hotel <span>Hotel and Bed&amp;Breakfast</span></h2>
     	<div class="row add_top_20">
-
-
+            {% if form.errors %}
+                <p>Your username and password didn't match.
+                Please try again.</p>
+            {% else %}
+                <p>Please, use the following form to log-in:</p>
+            {% endif %}
 
         	<div class="col-lg-9 col-md-8">
 
             <div id="form-group">
-                <form action="." method="post">
+                <form action="{% url 'login' %}" method="post">
                     {% csrf_token %}
                     <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
                     {{ form.as_p }}
+                    <input type="hidden" name="next" value="{% url 'rooms' %}"/>
                     <div class="row">
                         <div class="col-md-3">
                              <button type="submit" class="btn_1 white">Log In</button>
@@ -37,12 +42,7 @@
                 </form>
 
             </div>
-
-
-
             </div><!-- End col-md-8 -->
-
-
         </div><!-- End row -->
     </div><!-- End Container -->
 
