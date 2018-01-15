@@ -17,20 +17,19 @@
       <div><img src="{% static 'img/room_detail_5.jpg'%}" alt=""><div class="caption"><h3>Swimming pool</h3></div></div>
     </div>
     
-    
-    <h1 class="main_title_in">Double Room</h1>
+
+    <h1 class="main_title_in">{{ room.name }}</h1>
     <div class="container add_bottom_60">
         
         <div class="row">
         	<div class="col-md-8" id="room_detail_desc">
             <div id="single_room_feat">
-                <ul>
-                	<li><i class="icon_set_1_icon-7"></i>Wifi</li>
-                    <li><i class="icon_set_2_icon-116"></i>Plasma TV</li>
-                    <li><i class="icon_set_2_icon-104"></i>King size bed</li>
-                    <li><i class="icon_set_2_icon-111"></i>Bathtub</li>
-                    <li><i class="icon_set_2_icon-106"></i>Safe box</li>
-                </ul>
+                 <ul>
+                        <li><i class="icon_set_1_icon-7"></i>Wifi</li>
+                        {%  for facility in room.facilities.all %}
+                            <li><i class="icon_set_2_icon-{{ facility.icon_number }}"></i>{{ facility.name }}</li>
+                        {% endfor %}
+                 </ul>
             </div>
            
          <div class="row">
@@ -38,9 +37,7 @@
                     <h3>Description</h3>
                 </div>
                 <div class="col-md-9">
-                    <p>
-                        Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi. Eu ponderum mediocrem has, vitae adolescens in pro. Mea liber ridens inermis ei, mei legendos vulputate an, labitur tibique te qui.  Ad cum movet fierent assueverit, mei stet legere ne. Mel at vide soluta, ut utamur antiopam inciderint sed. Ut iriure perpetua voluptaria has, vim postea denique in, mollis pertinax elaboraret sed in. Per no vidit timeam, quis omittam sed at.
-                    </p>
+                    <p> {{ room.description }}</p>
                     <h4>Room facilities</h4>
                     <p>
                         Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi.
@@ -77,23 +74,22 @@
                         <tbody>
                         <tr>
                             <td>Low (from 23/03 to 31/05)</td>
-                            <td>140$</td>
+                            <td>{{ room.price }}$</td>
                         </tr>
                         <tr>
                             <td>Middle (from 23/03 to 31/05)</td>
-                            <td>180$</td>
+                            <td>{{ room.price|add:"20" }}$</td>
                         </tr>
                         <tr>
                             <td>High (from 23/03 to 31/05)</td>
-                            <td>200$</td>
+                            <td>{{ room.price|add:"40" }}$</td>
                         </tr>
                         </tbody>
                         </table>
                 </div><!-- End col-md-9  -->
             </div><!-- End row  -->
 
-          	<hr>
-            
+
 
             <hr>
             <div class="row">
