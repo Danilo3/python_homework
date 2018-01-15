@@ -1,0 +1,54 @@
+{% extends "hotel/base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <!-- SubHeader =============================================== -->
+    <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="{% static 'img/sub_header_short1.jpg' %}" data-natural-width="1400" data-natural-height="350">
+        <div id="subheader">
+            <h1>Log in</h1>
+    </div><!-- End subheader -->
+    </section><!-- End section -->
+    <!-- End SubHeader ============================================ -->
+
+
+    <div class="container margin_60">
+    <h2 class="main_title"><em></em>Welcome to Dacha Hotel <span>Hotel and Bed&amp;Breakfast</span></h2>
+    	<div class="row add_top_20">
+
+
+
+        	<div class="col-lg-9 col-md-8">
+
+            <div id="form-group">
+                <form action="." method="post">
+                    {% csrf_token %}
+                    <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+                    {{ form.as_p }}
+                    <div class="row">
+                        <div class="col-md-3">
+                             <button type="submit" class="btn_1 white">Log In</button>
+                        </div>
+                        <div class="col-md-3">
+                             <a href="{% url 'register' %}" > New to this site?</a>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+
+
+            </div><!-- End col-md-8 -->
+
+
+        </div><!-- End row -->
+    </div><!-- End Container -->
+
+
+     <script src="{% static "js/jquery-1.11.2.min.js"  %}"></script>
+    <script src="{% static 'js/common_scripts_min.js' %}"></script>
+    <script src="{% static 'js/functions.js' %}"></script>
+
+{% endblock %}

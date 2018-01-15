@@ -1,0 +1,23 @@
+{% extends "hotel/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class ="container margin_60">
+    <div class="col-lg-9 col-md-8">
+        <form action="" method="post">
+      {% csrf_token %}
+      <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+      {{ form.as_p }}
+      <button type="submit">Register</button>
+    </form>
+    </div>
+    </div>
+
+
+      <script src="{% static "js/jquery-1.11.2.min.js"  %}"></script>
+    <script src="{% static 'js/common_scripts_min.js' %}"></script>
+    <script src="{% static 'js/functions.js' %}"></script>
+
+{% endblock %}
