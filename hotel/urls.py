@@ -17,4 +17,5 @@ urlpatterns = [
     path('logout-then-login/', logout_then_login, name='logout_then_login'),
     path('dashboard/', views.dashboard,name='dashboard'),
     path('edit/', views.edit, name='edit'),
+    path('booking/', views.booking, name = "booking")
 ]

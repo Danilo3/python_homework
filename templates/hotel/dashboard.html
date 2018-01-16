@@ -16,7 +16,20 @@
     <div class="col-lg-9 col-md-8">
 
     <p>Welcome to your dashboard. You can <a href="{% url "edit" %}">edit your profile</a></p>
-
+    {% if reservations %}
+        <h4>Your Reservations</h4>
+         <table class="table table-striped">
+          <tbody>
+        {% for reservation in reservations.all %}
+                     <!-- start pricing table -->
+                        <tr>
+                            <td>{{ reservation.room.name }} (from {{ reservation.from_date }} to {{ reservation.to_date }})</td>
+                            <td>{{ reservation.room.price }}$</td>
+                        </tr>
+        {% endfor %}
+        </tbody>
+         </table>
+    {% endif %}
     </div>
      </div>
     <script src="{% static "js/jquery-1.11.2.min.js"  %}"></script>

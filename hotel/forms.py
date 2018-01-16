@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Profile
+from .models import Profile, Booking
 
 
 class LoginForm(forms.Form):
@@ -35,3 +35,11 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('date_of_birth', 'photo')
+
+
+class BookingRoomForm(forms.ModelForm):
+    from_date = forms.DateField(label="Arrival Date")
+    to_date = forms.DateField(label="Departure Date")
+    class Meta:
+        model = Booking
+        fields = ( 'adults_count', 'children_count')

@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 
-from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
+from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm, BookingRoomForm
 
 # Опять же, спасибо django за готовую форму аутентификации.
 from django.contrib.auth.forms import AuthenticationForm
@@ -17,7 +17,7 @@ from django.contrib.auth import login, authenticate
 from django.views import generic
 
 
-from hotel.models import Room, Profile
+from hotel.models import Room, Profile, Booking
 
 from django.contrib.auth.decorators import login_required
 
@@ -37,6 +37,15 @@ class RoomsView(generic.ListView):
 class RoomDetail(generic.DetailView):
     model = Room
     template_name = 'hotel/room.html'
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(RoomDetail, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['booking_form'] = BookingRoomForm()
+        return context
+
+
 
 
 def contactsView(request):
@@ -103,7 +112,9 @@ def user_login(request):
 @login_required
 def dashboard(request):
     photo = request.user.profile.photo
-    return render(request, 'hotel/dashboard.html', {'section': 'dashboard', "photo": photo})
+    profile = Profile.objects.get(user = request.user)
+    reservations = profile.reservations
+    return render(request, 'hotel/dashboard.html', {'section': 'dashboard', "photo": photo, "reservations":reservations})
 
 
 def register(request):
@@ -139,3 +150,17 @@ def edit(request):
                       'hotel/edit.html',
                       {'user_form': user_form,
                        'profile_form': profile_form})
+
+
+@login_required
+def booking(request):
+    if request.method =='POST':
+        booking_form = BookingRoomForm(request.POST)
+        if booking_form.is_valid():
+            new_booking = booking_form.save(commit=False)
+            new_booking.room =Room.objects.get(id = request.POST['room_id'])
+            new_booking.save()
+            profile = request.user.profile
+            profile.reservations.add(new_booking)
+            profile.save()
+        return render(request, 'hotel/dashboard.html')
